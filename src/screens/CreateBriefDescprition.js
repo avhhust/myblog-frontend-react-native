@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Button, Image, ScrollView, TextInput, View } from "react-native";
-import { styles } from "../styles/createPost";
-import * as ImagePicker from "expo-image-picker";
-import Post from "../components/Post";
+import { useState } from 'react';
+import { Button, Image, ScrollView, TextInput, View } from 'react-native';
+import { styles } from '../styles/createPostStyles';
+import * as ImagePicker from 'expo-image-picker';
+import Post from '../components/Post';
 
 export default function CreateBriefDescprition({ navigation }) {
   const [image, setImage] = useState(null);
@@ -17,9 +17,9 @@ export default function CreateBriefDescprition({ navigation }) {
   };
 
   const goToPostBody = () => {
-    navigation.navigate("Post Body");
+    navigation.navigate('Post Body');
   };
- 
+
   const ImagePickerAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Photo,
@@ -39,26 +39,25 @@ export default function CreateBriefDescprition({ navigation }) {
         <TextInput
           onChange={inputBriefTitle}
           style={[styles.inputField, styles.headerField]}
-          placeholder="Type short header"
+          placeholder='Type short header'
           maxLength={30}
         />
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Button title="Choose photo" onPress={ImagePickerAsync} />
-          <Button title="Drop" onPress={dropImage} />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Button title='Choose photo' onPress={ImagePickerAsync} />
+          <Button title='Drop' onPress={dropImage} />
         </View>
       </View>
 
       <View style={styles.imageContainer}>
-        { 
-          image && 
+        {image && (
           <Image
-            resizeMode="cover"
+            resizeMode='cover'
             source={{ uri: image?.assets[0].uri }}
             style={styles.previewImage}
           />
-        }
+        )}
       </View>
-      { image && <Button title="Next" onPress={goToPostBody}/> }
+      {image && <Button title='Next' onPress={goToPostBody} />}
     </View>
   );
 }
